@@ -9,6 +9,10 @@ curl https://get.modular.com | \
 Command copied to clipboard
 4. Install the Mojo SDK:
 ```shell
+
+# 配置一下全局的国内pip镜像
+# pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
 modular install mojo
 ```
 
