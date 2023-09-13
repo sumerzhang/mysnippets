@@ -13,8 +13,11 @@ Command copied to clipboard
 # 配置一下全局的国内pip镜像
 # pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
+# 国内直接运行modular install mojo比较慢，主要看网速
+
 modular install mojo
 ```
+
 
 5. Open the Ubuntu workspace in VS Code with this:
 
