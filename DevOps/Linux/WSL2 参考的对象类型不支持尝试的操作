@@ -1,0 +1,20 @@
+在网上找到一种解决方式是：
+管理员权限打开Powershell，输入如下命令:
+
+netsh winsock reset
+1
+但是这种方法只能暂时解决问题，使WSL能够正常启动，下一次开机时，打开WSL时还是会提示同样的错误。
+
+原因分析及解决办法：
+WSL是微软的开源项目，在GitHub上WSL项目ISSUE中找到了造成这个问题的原因和解决办法，中文版的翻译如下：
+
+显然，如果Winsock LSP DLL被加载到其进程中，则wsl.exe将显示此错误。
+最简单的解决方案是对wsl.exe使用WSCSetApplicationCategory WinAPI调用来防止这种情况。
+在幕后，该调用在HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinSock2\Parameters\AppId_Catalog中为wsl.exe创建一个条目。
+这告诉Windows不要将LSP DLL加载到wsl.exe进程中。
+我们有一个可以进行此调用的工具：
+www.proxifier.com/tmp/Test20200228/NoLsp.exe
+请以管理员身份运行，并以wsl.exe的完整路径作为参数：
+NoLsp.exe C:\windows\system32\wsl.exe
+这已经解决了我的问题。
+请让我知道它如何为您工作。
